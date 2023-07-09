@@ -16,7 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.shortcuts import render
+
+def index(request):
+    return render(request,"index.html")
+
+def footer(request):
+    return render(request,"footer.html")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("",index,name="index"),
+    path("footer/",footer,name="footer"),
 ]
