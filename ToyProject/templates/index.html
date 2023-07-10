@@ -2,9 +2,19 @@
 
 {% load static %}
 
+{% block contenthead %}
+<title>Index</title>
+
+<link href="{% static "css/index.css" %}" rel="stylesheet">
+{% endblock contenthead %}
+
+
+{% block contentpremain %}
+{% endblock contentpremain %}
+
 {% block content %}
 
-<h1>
+<h1 class="maintext">
     content block test
 </h1>
 
