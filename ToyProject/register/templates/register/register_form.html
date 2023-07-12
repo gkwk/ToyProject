@@ -1,0 +1,29 @@
+<form method="post" action="{% url 'register:register' %}">
+    {% csrf_token %}
+    <svg class="mb-4" width="72" height="57"><use xlink:href="#bootstrap"/></svg>
+    <h1 class="h3 mb-3 fw-normal">Register</h1>
+
+ 
+    <div class="form-floating mb-3">
+        <input type="email" name="username" class="form-control rounded-3" id="floatingInput" value="{{ form.username.value|default_if_none:'' }}" placeholder="eamil" required>
+        <label for="floatingInput">Email address</label>
+      </div>
+
+    <div class="form-floating mb-3">
+        <input type="password" name="password1" class="form-control rounded-3" id="floatingPassword1" value="{{ form.password1.value|default_if_none:'' }}" placeholder="password" required>
+        <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="password" name="password2" class="form-control rounded-3" id="floatingPassword2" value="{{ form.password2.value|default_if_none:'' }}" placeholder="password_confirm" required>
+        <label for="floatingPassword">Password confirm</label>
+    </div>
+
+    {% comment %} <div class="checkbox mb-3">
+        <label>
+        <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div> {% endcomment %}
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+    {% comment %} <p class="mt-5 mb-3 text-muted">&copy; 2023–2023</p> {% endcomment %}
+</form>

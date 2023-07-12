@@ -12,10 +12,6 @@
   justify-content: center;
 }
 
-._content .custom_min_width300 {
-  min-width: 50vw;
-}
-
 ._content .form-signin {
   min-width: 240px;
   width: 50vw;
