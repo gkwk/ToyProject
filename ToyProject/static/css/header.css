@@ -3,6 +3,11 @@ html {
   width: 100%;
 }
 
+main ._content{
+  min-height: 480px;
+  height: calc( 100% - 73px - 24px - 24px - 24px - 63px );
+}
+
 
 ._header .form-control-dark {
     border-color: var(--bs-gray);
