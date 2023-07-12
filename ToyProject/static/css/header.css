@@ -1,3 +1,9 @@
+html {
+  min-width: 480px;
+  width: 100%;
+}
+
+
 ._header .form-control-dark {
     border-color: var(--bs-gray);
   }
