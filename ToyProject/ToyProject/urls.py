@@ -14,18 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.urls import path, include
 from django.contrib import admin
-from django.urls import path
-from django.shortcuts import render
 
-def index(request):
-    return render(request,"index.html")
-
-def footer(request):
-    return render(request,"footer.html")
+import ToyProject.views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("",index,name="index"),
-    path("footer/",footer,name="footer"),
+    path("admin/", admin.site.urls,name="admin"),
+    path("",ToyProject.views.index,name="index"),
+    
+    #include
+    path("register/",include("register.urls"))
 ]
