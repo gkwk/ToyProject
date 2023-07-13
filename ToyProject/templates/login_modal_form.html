@@ -1,0 +1,20 @@
+<form method="post" action="{% url 'index' %}" novalidate>
+    {% csrf_token %}
+
+    <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control rounded-3" id="floatingInput" placeholder="eamil">
+        <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" name="password" class="form-control rounded-3" id="floatingPassword" placeholder="password">
+        <label for="floatingPassword">Password</label>
+    </div>
+    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Log In</button>
+        {% comment %} <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small> {% endcomment %}
+    <hr class="my-4">
+    <h2 class="fs-5 fw-bold mb-3">비밀번호를 잊으셨다면...</h2>
+    <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" type="submit">
+        <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
+        Sign up with Twitter
+    </button>
+</form>

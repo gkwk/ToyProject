@@ -47,10 +47,28 @@
             <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
             <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
             <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <li class="nav-item"><a id="login_modal" data-bs-target="#login-modal" href="#" class="nav-link" type="button">Log In</a></li>
+            <li class="nav-item"><a href="{% url 'register:register' %}" class="nav-link">Register</a></li>
         </ul>
     </header>
+    {% include "login_modal.html" %}
 </div>
 {% endblock header %}
 
 {% block headerjs %}
+<script>
+    $('#login_modal').click(function(e){
+        e.preventDefault();
+        $('#modalSignin').modal("show");
+    });
+
+    {% comment %} var LoginModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
+
+    $('#login_modal').on('shown.bs.modal', (event) => {})
+
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    }) {% endcomment %}
+</script>
 {% endblock headerjs %}
