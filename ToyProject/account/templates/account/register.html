@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block contenthead %}
+<title>Register</title>
+
+<link href="{% static "register/css/signin.css" %}" rel="stylesheet">
+{% endblock contenthead %}
+
+
+{% block contentpremain %}
+{% endblock contentpremain %}
+
+{% block content %}
+<dic class="bodydiv">
+    <div class="text-center">
+        <div class="form-signin m-auto">
+            {% include "./register_form.html" %}
+        </div>
+    </div>
+</dic>
+{% endblock content %}
+
+{% block contentjs %}
+{% endblock contentjs %}

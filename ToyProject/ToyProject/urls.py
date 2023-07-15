@@ -24,6 +24,6 @@ urlpatterns = [
     path("",ToyProject.views.index,name="index"),
     
     #include
-    path("register/",include(("register.urls","register"),namespace="register")),
+    # path("register/",include(("register.urls","register"),namespace="register")),
     path("account/",include(("account.urls","account"),namespace="account"))
 ]

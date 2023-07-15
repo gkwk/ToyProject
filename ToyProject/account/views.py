@@ -1,9 +1,111 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse,Http404,JsonResponse
+from django.middleware.csrf import get_token
+# from django.contrib.auth.models import *
+from django.contrib.auth import authenticate, login, logout
 
-# Create your views here.
+from .forms import UserForm, LoginForm
 
 def login_view(request):
-    return
+    try:
+        if request.user.is_authenticated: # 유저가 로그인한 상태인지 확인한다.
+            # 로그인한 상태에서 로그인 페이지에 강제 접속한다면 홈으로 보낸다.
+            return redirect('/')
+        else:
+            if request.method == 'POST':
+                login_form = LoginForm(request.POST)
+                
+                if login_form.is_valid():                
+                    user_username = login_form.cleaned_data["username"]
+                    user_password = login_form.cleaned_data["password"]
+                    user_remember_me = login_form.cleaned_data["remember_me"]
+                    
+                    user = authenticate(username=user_username, password=user_password)
+
+                    if not user is None:
+                        login(request,user)
+                        
+                        if user_remember_me:
+                            # 30일간 세션이 유지된다. (3600sec * 24 * 30)
+                            request.session.set_expiry(3600*24*30)
+                        else:
+                            request.session.set_expiry(0)
+                        
+                        return JsonResponse({'status': 'success'})
+                else:
+                    return JsonResponse({'status': 'error', 'csrf_token': get_token(request)})
+    except:
+        pass
+        
+    return redirect('/')
 
 def logout_view(request):
-    return
+    try:
+        # 유저가 로그인한 상태인지 확인한다.
+        if request.user.is_authenticated: 
+            logout(request)
+            # 로그아웃한다.
+            return redirect('/')
+    except:
+        pass
+    
+    return redirect('/')
+
+
+def register_view(request):
+    try:
+        if request.user.is_authenticated: # 유저가 로그인한 상태인지 확인한다.
+            # 홈으로 보낸다.
+            return redirect('/')
+        else:
+            if request.method == "POST":
+                # POST 정보로 UserForm 생성
+                register_form = UserForm(request.POST)
+                
+                # 유효성검사
+                if register_form.is_valid():
+                    register_form_cleand = UserForm({"username" : register_form.cleaned_data["username"],
+                                                    "email" : register_form.cleaned_data["username"],
+                                                    "password1" : register_form.cleaned_data["password1"],
+                                                    "password2" : register_form.cleaned_data["password2"],
+                                                    "last_name" : register_form.cleaned_data["username"].split("@")[0],
+                                                    })
+                    
+                    if register_form_cleand.is_valid():
+                        register_form_cleand.save()
+                        return redirect('/')
+            else:
+                register_form = UserForm()
+    except:
+        register_form = UserForm()
+        
+    
+    return render(request, 'account/register.html', {'form': register_form})
+
+
+
+# def login_view(request):
+#     # return HttpResponse("login")
+#     if request.method == 'POST':
+#             login_form = LoginForm(request.POST)
+            
+#             if login_form.is_valid():                
+#                 user_username = login_form.cleaned_data["username"]
+#                 user_password = login_form.cleaned_data["password"]
+#                 user_remember_me = login_form.cleaned_data["remember_me"]
+                
+#                 user = authenticate(username=user_username, password=user_password)
+    
+    
+    
+#     return JsonResponse({"status": "error","csrf_token" : get_token(request)})
+
+# def logout_view(request):
+#     return HttpResponse("logout")
+
+
+# def modal(request):
+#     return render(request,"register/modal.html")
+
+
+

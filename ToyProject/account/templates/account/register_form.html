@@ -1,5 +1,5 @@
 {% comment %} novalidate를 통해서 팝업 validation을 끌 수 있다. {% endcomment %}
-<form method="post" action="{% url 'register:register' %}" novalidate>
+<form method="post" action="{% url 'account:register' %}" novalidate>
     {% csrf_token %}
     <svg class="mb-4" width="72" height="57"><use xlink:href="#bootstrap"/></svg>
     <h1 class="h3 mb-3 fw-normal">Register</h1>
