@@ -23,8 +23,8 @@
             <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" aria-current="page" id="page_home">Home</a></li>
 
             {% if user.is_authenticated %}
-            <li class="nav-item"><a href="#" class="nav-link" id="page_ai_train">AI train</a></li>
-            <li class="nav-item"><a href="#" class="nav-link" id="page_ai_predict">AI predict</a></li>
+            <li class="nav-item"><a href="{% url 'services:train' %}" class="nav-link" id="page_ai_train">AI train</a></li>
+            <li class="nav-item"><a href="{% url 'services:predict' %}" class="nav-link" id="page_ai_predict">AI predict</a></li>
             <li class="nav-item"><a href="{% url 'account:logout' %}" class="nav-link">Log Out</a></li>
             {% else %}
             <li class="nav-item"><a href="{% url 'account:register' %}" class="nav-link" id="page_register">Register</a></li>
