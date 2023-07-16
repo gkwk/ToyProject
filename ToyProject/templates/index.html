@@ -21,4 +21,9 @@
 {% endblock content %}
 
 {% block contentjs %}
+<script>
+    $("#page_home").addClass("active");
+    {% comment %} $("#page_home").removeClass("class_name"); {% endcomment %}
+    {% comment %} document.getElementById("page_home").classList.add("active"); {% endcomment %}
+</script>
 {% endblock contentjs %}

@@ -20,17 +20,15 @@
         </a>
 
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" aria-current="page" id="page_home">Home</a></li>
 
             {% if user.is_authenticated %}
+            <li class="nav-item"><a href="#" class="nav-link" id="page_ai_train">AI train</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" id="page_ai_predict">AI predict</a></li>
             <li class="nav-item"><a href="{% url 'account:logout' %}" class="nav-link">Log Out</a></li>
             {% else %}
+            <li class="nav-item"><a href="{% url 'account:register' %}" class="nav-link" id="page_register">Register</a></li>
             <li class="nav-item"><a id="login_modal" data-bs-target="#login-modal" href="#" class="nav-link" type="button">Log In</a></li>
-            <li class="nav-item"><a href="{% url 'account:register' %}" class="nav-link">Register</a></li>
             {% endif %}
             
         </ul>
@@ -53,6 +51,14 @@
         event.preventDefault();
         $('#modalSignin').modal("show");
     });
+
 </script>
 {% endif %}
+
+<script>
+    {% comment %} $("#page_home").addClass("active"); {% endcomment %}
+    {% comment %} $("#page_home").removeClass("class_name"); {% endcomment %}
+    {% comment %} document.getElementById("page_home").classList.add("active"); {% endcomment %}
+</script>
+
 {% endblock headerjs %}
