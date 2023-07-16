@@ -1,9 +1,10 @@
 {% comment %} novalidate를 통해서 팝업 validation을 끌 수 있다. {% endcomment %}
 <form method="post" action="{% url 'account:register' %}" novalidate>
     {% csrf_token %}
-    <svg class="mb-4" width="72" height="57"><use xlink:href="#bootstrap"/></svg>
-    <h1 class="h3 mb-3 fw-normal">Register</h1>
-
+    <div class="text-center">
+        <svg class="mb-4" width="72" height="57"><use xlink:href="#bootstrap"/></svg>
+        <h1 class="h3 mb-3 fw-normal">Register</h1>
+    </div>
  
     <div class="form-floating mb-3">
         <input type="email" name="username" class="form-control rounded-3" id="register_floatingemail" value="{{ form.username.value|default_if_none:'' }}" placeholder="eamil" required>
@@ -20,11 +21,27 @@
         <label for="register_floatingPassword2">Password confirm</label>
     </div>
 
+    <div class="mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="agree1" value="true" id="agree1" required>
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="agree2" value="true" id="agree2" required>
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+    </div>
+
+    
+
     {% comment %} <div class="checkbox mb-3">
         <label>
         <input type="checkbox" value="remember-me"> Remember me
         </label>
     </div> {% endcomment %}
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
     {% comment %} <p class="mt-5 mb-3 text-muted">&copy; 2023–2023</p> {% endcomment %}
 </form>
