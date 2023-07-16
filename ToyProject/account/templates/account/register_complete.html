@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block contenthead %}
+<title>Register</title>
+
+<link href="{% static "account/css/register.css" %}" rel="stylesheet">
+{% endblock contenthead %}
+
+
+{% block contentpremain %}
+{% endblock contentpremain %}
+
+{% block content %}
+<dic class="bodydiv">
+    <div class="form-signin m-auto">
+        <div class="text-center">
+            <svg class="mb-4" width="72" height="57"><use xlink:href="#bootstrap"/></svg>
+            <h1 class="h3 mb-3 fw-normal">Register</h1>
+        </div>
+
+        <div class="text-center">
+            <h1 class="h3 mb-3 fw-normal">등록이 완료되었습니다.</h1>
+        </div>
+        
+        <a href="{% url 'index' %}" class="w-100 btn btn-lg btn-primary" type="button">Go to Home</a>
+        {% comment %} <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button> {% endcomment %}
+    </div>
+</dic>
+{% endblock content %}
+
+{% block contentjs %}
+<script>
+    $("#page_register").addClass("active");
+    {% comment %} $("#page_home").removeClass("class_name"); {% endcomment %}
+    {% comment %} document.getElementById("page_home").classList.add("active"); {% endcomment %}
+</script>
+{% endblock contentjs %}

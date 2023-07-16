@@ -73,7 +73,7 @@ def register_view(request):
                     
                     if register_form_cleand.is_valid():
                         register_form_cleand.save()
-                        return redirect('/')
+                        return redirect('account:register_complete')
             else:
                 register_form = UserForm()
     except:
@@ -81,6 +81,11 @@ def register_view(request):
         
     
     return render(request, 'account/register.html', {'form': register_form})
+
+
+def register_complete_view(request):
+    # referer참조로 직접 접근을 최대한 차단
+    return render(request, 'account/register_complete.html')
 
 
 
