@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.core.validators import EmailValidator,MinLengthValidator,MaxLengthValidator,RegexValidator,ProhibitNullCharactersValidator
 
@@ -48,3 +48,34 @@ class LoginForm(forms.Form):
     
 #     class Meta:
 #         fields = ("username", "password", "remember_me")
+
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(label='email',
+                             widget=forms.EmailInput(attrs={'class': 'form-control',
+                                                            'placeholder': 'ID',
+                                                            'type': 'email',
+                                                            'name': 'email'
+                                                            }
+                                                    )
+                            )
+    
+class UserSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(label="비밀번호",
+                                    widget=forms.PasswordInput(attrs={'name': 'password1',
+                                                                      'placeholder': 'password',
+                                                                      'class': 'form-control',
+                                                                      "autocomplete": "new-password"}
+                                                               ),
+                                    strip=False,
+                                    )
+    
+    new_password2 = forms.CharField(label="비밀번호 확인",
+                                    widget=forms.PasswordInput(attrs={'name': 'password2',
+                                                                      'placeholder': 'password_confirm',
+                                                                      'class': 'form-control',
+                                                                      "autocomplete": "new-password"}
+                                                               ),
+                                    strip=False,
+                                    )

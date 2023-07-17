@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "account",
     "services",
-    "rest_framework",
     
 ]
 
@@ -189,3 +189,11 @@ SESSION_SAVE_EVERY_REQUEST = False
 
 # 비밀번호 찾기 페이지 만료시간, 단위 : 초(sec)
 PASSWORD_RESET_TIMEOUT = 86400
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    # 'PAGE_SIZE': 10
+}

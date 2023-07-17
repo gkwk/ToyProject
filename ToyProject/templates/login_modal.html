@@ -31,7 +31,13 @@
             </div>
             
             <div class="modal-body p-5 pt-0">
-                {% include "login_modal_form.html" %}    
+                {% include "login_modal_form.html" %}
+                
+                <hr class="my-4">
+                <h2 class="fs-5 fw-bold mb-3">비밀번호를 잊으셨다면...</h2>
+                <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" onclick = "location.href = '{% url "account:password_reset" %}' ">
+                    비밀번호 찾기
+                </button>
             </div>
         </div>
     </div>

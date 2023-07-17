@@ -1,10 +1,17 @@
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.http import HttpResponse,Http404,JsonResponse
+from django.contrib.auth import views as auth_views
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.models import User
 from django.middleware.csrf import get_token
 # from django.contrib.auth.models import *
 from django.contrib.auth import authenticate, login, logout
 
-from .forms import UserForm, LoginForm
+from account.forms import UserForm, LoginForm
+
+
+
 
 def login_view(request):
     try:
@@ -32,8 +39,8 @@ def login_view(request):
                             request.session.set_expiry(0)
                         
                         return JsonResponse({'status': 'success'})
-                else:
-                    return JsonResponse({'status': 'error', 'csrf_token': get_token(request)})
+
+            return JsonResponse({'status': 'error', 'csrf_token': get_token(request)})
     except:
         pass
         
@@ -86,6 +93,34 @@ def register_view(request):
 def register_complete_view(request):
     # referer참조로 직접 접근을 최대한 차단
     return render(request, 'account/register_complete.html')
+
+
+
+class UserPasswordResetView(auth_views.PasswordResetView):
+    success_url = reverse_lazy("account:password_reset_done")
+    
+    def form_valid(self, form):
+        if User.objects.filter(email=self.request.POST.get("email")).exists():
+            return super().form_valid(form)
+        else:
+            return render(self.request,'account/password_reset/password_reset_form.html',context={"form" : form, "error" : True})
+
+def RefererCheck_PasswordResetDoneView(request):
+    domain = str(get_current_site(request))
+    # 127.0.0.1:8000    
+    Received_referer = request.META.get('HTTP_REFERER', '').split("/")[1:]
+    Received_referer = [i for i in Received_referer if i != ""]
+    target_referer = "password_reset"
+    
+    if Received_referer == [domain,"account",target_referer]:
+        return auth_views.PasswordResetDoneView.as_view(template_name='account/password_reset/password_reset_done.html')(request)
+    else:
+        return redirect("index")
+
+
+
+
+
 
 
 
