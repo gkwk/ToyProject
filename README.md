@@ -4,3 +4,6 @@ mlflow 사용법 : mlflow db 폴더에서 mlflow server --backend-store-uri sqli
 Sqlite3 대신 MySQL을 사용하려면 settings.py의 DATABASE에서 sqlite3부분을 주석처리하고 MySQL부분의 주석을 해제 및 환경에 맞게 변수를 수정한다.<br>
 
 AI_test.csv => 4x_0 + 5x_1 + 2x_2 + 7_x3 + 0.1x_4 + 15x_5 + 0.05x_6+ x_7 = y<br>
+
+django 비밀번호 찾기 시 숨겨진 username을 변경해도 링크만 만료되고 다른 user의 비밀번호는 변경되지 않는 것을 확인
+class view에서는 reverse_lazy를 사용해야 한다.
