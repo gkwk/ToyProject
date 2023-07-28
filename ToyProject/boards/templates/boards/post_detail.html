@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+게시글
+{% endblock title %}
+
+{% block contenthead %}
+<link href="{% static "boards/css/index.css" %}" rel="stylesheet">
+{% endblock contenthead %}
+
+
+{% block contentpremain %}
+{% endblock contentpremain %}
+
+{% block content %}
+<div class="notice">
+    <div class="notice-contents" style="border: 8px solid rgb(152, 162, 247); border-radius: 15px; padding: 10px;">
+        <h1 class="mt-4 mb-3">{{ post.title }}</h1>
+        <hr style="border:1px color= silver;" width="100%">
+        <p style="text-align: right;">{{post.created_date}}에 최종 게시됨.</p>
+        <hr style="border:1px color= silver;" width="100%">
+        <div id="return_html_text" class="return_html_text">{{post.content}}</div>
+    </div> 
+
+    <br>
+    <div class="notice-contents" style="border: 1px solid rgb(152, 162, 247); border-radius: 15px; padding: 10px;">
+
+        {% if comment_list|length == 0 %}
+        댓글이 없습니다.
+        {% else %}
+        {% for comment in comment_list %}
+        <div class="d-flex">
+            <div class="flex-shrink-0"><img class="rounded-circle" src="{% static 'img/dummypic.jpg' %}" alt="..."></div>
+            <div class="ms-3">
+                    
+                    {% if comment.user_id_char == user.username %}
+                    <form method="post" action="{% url 'boards:delete_comment' comment.id %}" class="fw-bold">
+                        {{ comment.user_id_char }} 
+                        ( {{ comment.created_date }}
+                        {% if comment.updated_bool %}
+                        / {{ comment.updated_date }} (갱신됨)
+                        {% endif %} )
+
+                        {% csrf_token %}
+                        <button type="submit" style="width:80px; height:30px; background-color:transparent; border:none;">삭제하기</button>
+                    </form>
+                    {% else %}
+                    <div class="fw-bold">
+                        {{ comment.user_id_char }} 
+                        ( {{ comment.created_date }}
+                        {% if comment.updated_bool %}
+                        / {{ comment.updated_date }} (갱신됨)
+                        {% endif %} )
+                    </div>
+
+                    {% endif %}
+                
+                {{ comment.comment_content }}
+            
+            </div>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <br>
+    
+    {% if user.is_authenticated %}
+    <div class="notice-contents" style="border: 1px solid rgb(152, 162, 247); border-radius: 15px; padding: 10px;">
+
+    <div class="d-flex">
+        <div class="flex-shrink-0"><img class="rounded-circle" src="{% static 'img/dummypic.jpg' %}" alt="..."></div>
+        <div class="ms-3">
+            <div class="fw-bold">
+                {{ user.username }}
+            </div>
+
+
+            
+        </div>
+    </div>
+
+        <br>
+        <div class="register_form">
+            <form method="post">
+                {% csrf_token %}
+                {% comment %} <input type="hidden" name="user_id" value={{ comment_form.user_id.value|default_if_none:user.id }}> {% endcomment %}
+                {% comment %} <input type="hidden" name="user_id_char" value={{ comment_form.user_id.value|default_if_none:user.username }}> {% endcomment %}
+                {% comment %} <input type="hidden" name="post_id" value={{ comment_form.post_id.value|default_if_none:post_pk }}> {% endcomment %}
+                <div class="register_form_field">
+                <input  type="text"
+                        class="form-control"
+                        name="comment_content" 
+                        value="{{ comment_form.comment_content.value|default_if_none:'' }}"
+                        placeholder="comment"
+                        maxlength="300"
+                        required
+                >
+                </div>
+        
+                <br>
+        
+                <button type="submit" class="btn btn-primary">생성하기</button>
+            </form>
+        </div>
+    </div> 
+    {% endif %}
+</div>
+{% endblock content %}
+
+{% block contentjs %}
+<script>
+    $("#page_boards_index").addClass("active");
+</script>
+{% endblock contentjs %}

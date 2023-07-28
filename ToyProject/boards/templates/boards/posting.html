@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+게시판 글쓰기
+{% endblock title %}
+
+{% block contenthead %}
+{% comment %} <link href="{% static "css/index.css" %}" rel="stylesheet"> {% endcomment %}
+{% endblock contenthead %}
+
+
+{% block contentpremain %}
+{% endblock contentpremain %}
+
+{% block content %}
+<div class="notice">
+  <div class="notice-new-post">
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <textarea name="title" id="title" rows="2" cols="50" placeholder="제목을 입력해주세요"></textarea>
+
+      <div id="smarteditor">
+        <textarea name="content" id="editorTxt" rows="20" cols="30" placeholder="내용을 입력해주세요"></textarea>
+      </div>
+
+      <button type="submit" class="save btn btn-default">
+        ​​​​​​​​<input type="button" value="SAVE" onclick="submitPost()" />
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock content %}
+
+{% block contentjs %}
+<script>
+</script>
+{% endblock contentjs %}

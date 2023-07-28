@@ -1,0 +1,87 @@
+/* -------------------- Notice Page -------------------- */
+._content .notice {
+    min-height: 480px;
+    height: calc( 100vh - 73px - 24px - 24px - 24px - 63px );
+    margin: 0 auto;
+    
+}
+
+._content .notice-contents {
+    min-width: 480px;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+._content .notice-contents #notice-head {
+    margin: 0 10px 30px 10px;
+    text-align: left;
+    font-size: 36px;
+    font-family: "Open Sans", sans-serif;
+}
+
+._content .notice-contents .notice-count {
+    margin: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+._content table {
+    border-collapse: collapse;
+}
+
+._content table#tableid {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+._content table th, table td {
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+}
+
+._content table th:first-child, td:first-child {
+    border-left: none;
+}
+
+._content table th:last-child, td:last-child {
+    border-right: none;
+}
+
+._content table tr#table-head th,
+._content table tr#table-main td {
+    padding: 18px 12px;
+}
+
+
+._content table tr#table-main td.table-main-title {
+    text-align: left;
+}
+
+._content table tr#table-main a {
+    color: black;
+    text-decoration: none;
+}
+
+._content table tr#table-main a:hover {
+    color: rgb(223, 0, 56);
+    text-decoration: underline;
+}
+
+
+
+/* -------------------- Notice New Posting -------------------- */
+._content .notice .notice-new-post {
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+._content .notice .notice-new-post textarea#title {
+    width: 572px;
+    height: 3rem;
+    resize: none;
+}

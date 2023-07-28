@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+게시판
+{% endblock title %}
+
+{% block contenthead %}
+<link href="{% static "boards/css/index.css" %}" rel="stylesheet">
+{% endblock contenthead %}
+
+
+{% block contentpremain %}
+{% endblock contentpremain %}
+
+{% block content %}
+<div class="notice">
+    <div class="notice-contents">
+        <div id="notice-head">▶ 공지사항</div>
+        <div class="notice-count">등록된 공지사항 {{ Post_len }}개</div>
+        <table class="table table-primary" id="tableid">
+            <thead>
+                <tr class="table-primary" id="table-head">
+                    <th style="width: 80px;">순번</th>
+                    <th style="min-width: 150px;">제목</th>
+                    <th style="width: 150px;">작성자</th>
+                    <th style="width: 250px;">작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in Post_list %}
+                <tr class="table-light" id="table-main">
+                    <td>{{ post.id }}</td>
+                    <td class="table-main-title"><a href="{% url 'boards:post_detail' pk=post.id %}">{{ post.title }}</a></td>
+                    <td>{{ post.user_id_char }}</td>
+                    <td>{{ post.created_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if user.is_superuser %}
+        <button type="button" class="btn btn-primary" onclick="location.href='{% url 'boards:posting' %}'">게시물 작성하기</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block contentjs %}
+<script>
+    $("#page_boards_index").addClass("active");
+</script>
+{% endblock contentjs %}

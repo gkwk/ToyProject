@@ -7,6 +7,8 @@
 <link href="{% static "css/login_modal.css" %}" rel="stylesheet">
 {% endblock headerhead %}
 
+
+
 {% block headerpremain %}
 {% endblock headerpremain %}
 
@@ -21,6 +23,7 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" aria-current="page" id="page_home">Home</a></li>
+            <li class="nav-item"><a href="{% url 'boards:index' %}" class="nav-link" id="page_boards_index">Boards</a></li>
 
             {% if user.is_authenticated %}
             <li class="nav-item"><a href="{% url 'services:train' %}" class="nav-link" id="page_ai_train">AI train</a></li>
