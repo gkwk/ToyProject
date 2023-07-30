@@ -22,6 +22,15 @@
         <p style="text-align: right;">{{post.created_date}}에 최종 게시됨.</p>
         <hr style="border:1px color= silver;" width="100%">
         <div id="return_html_text" class="return_html_text">{{post.content}}</div>
+        <hr style="border:1px color= silver;" width="100%">
+        {% comment %} 왜 여기서는 user_id_id를 사용해나 하는가? comment와 뭐가 다르지? {% endcomment %}
+        {% if post.user_id_id == user.id %}
+        <form method="post" action="{% url 'boards:delete_post' post_pk %}" class="fw-bold">
+            {% csrf_token %}
+            <button type="submit" style="width:80px; height:30px; background-color:transparent; border:none;">삭제하기</button>
+        </form>
+        {% endif %}
+        
     </div> 
 
     <br>
@@ -35,7 +44,7 @@
             <div class="flex-shrink-0"><img class="rounded-circle" src="{% static 'img/dummypic.jpg' %}" alt="..."></div>
             <div class="ms-3">
                     
-                    {% if comment.user_id_char == user.username %}
+                    {% if comment.user_id == user.id %}
                     <form method="post" action="{% url 'boards:delete_comment' comment.id %}" class="fw-bold">
                         {{ comment.user_id_char }} 
                         ( {{ comment.created_date }}
