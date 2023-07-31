@@ -1,0 +1,23 @@
+._content .boards_post {
+    min-height: 480px;
+    height: calc( 100vh - 73px - 24px - 24px - 24px - 63px );
+    margin: 0 auto;
+}
+
+._content .boards_post .boards_posting {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+._content .boards_post .boards_posting textarea#title {
+    width: 572px;
+    height: 3rem;
+    resize: none;
+}
+
+._content .boards_post .boards_posting textarea#content {
+    width: 572px;
+    height: 3rem;
+    resize: none;
+}

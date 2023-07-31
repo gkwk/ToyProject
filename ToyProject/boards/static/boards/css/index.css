@@ -1,26 +1,25 @@
-/* -------------------- Notice Page -------------------- */
-._content .notice {
+._content .boards_post {
     min-height: 480px;
     height: calc( 100vh - 73px - 24px - 24px - 24px - 63px );
     margin: 0 auto;
     
 }
 
-._content .notice-contents {
+._content .boards_post_contents {
     min-width: 480px;
     width: 80%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-._content .notice-contents #notice-head {
+._content .boards_post_contents #boards_head {
     margin: 0 10px 30px 10px;
     text-align: left;
     font-size: 36px;
     font-family: "Open Sans", sans-serif;
 }
 
-._content .notice-contents .notice-count {
+._content .boards_post_contents .boards_post_count {
     margin: 10px;
     width: 90%;
     margin-left: auto;
@@ -69,19 +68,4 @@
 ._content table tr#table-main a:hover {
     color: rgb(223, 0, 56);
     text-decoration: underline;
-}
-
-
-
-/* -------------------- Notice New Posting -------------------- */
-._content .notice .notice-new-post {
-    width: 80%;
-    margin: 0 auto;
-    text-align: left;
-}
-
-._content .notice .notice-new-post textarea#title {
-    width: 572px;
-    height: 3rem;
-    resize: none;
 }

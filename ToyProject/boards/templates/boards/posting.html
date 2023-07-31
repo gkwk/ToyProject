@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block contenthead %}
-{% comment %} <link href="{% static "css/index.css" %}" rel="stylesheet"> {% endcomment %}
+<link href="{% static "boards/css/posting.css" %}" rel="stylesheet">
 {% endblock contenthead %}
 
 
@@ -15,21 +15,19 @@
 {% endblock contentpremain %}
 
 {% block content %}
-<div class="notice">
-  <div class="notice-new-post">
-    <form method="POST" action="" enctype="multipart/form-data">
-      {% csrf_token %}
-      <textarea name="title" id="title" rows="2" cols="50" placeholder="제목을 입력해주세요"></textarea>
-
-      <div id="smarteditor">
-        <textarea name="content" id="editorTxt" rows="20" cols="30" placeholder="내용을 입력해주세요"></textarea>
-      </div>
-
-      <button type="submit" class="save btn btn-default">
-        ​​​​​​​​<input type="button" value="SAVE" onclick="submitPost()" />
-      </button>
-    </form>
-  </div>
+<div class="boards_post">
+    <div class="boards_posting">
+        <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">제목</div>
+        <textarea name="title" class="mb-3" id="title" rows="2" cols="50" placeholder="제목을 입력해주세요"></textarea>
+        <div class="mb-3">내용</div>
+        <textarea name="content" class="mb-3" id="content" rows="20" cols="30" placeholder="내용을 입력해주세요"></textarea>
+        
+        <br>
+        <button class="btn btn-lg btn-primary mb-3" type="submit">게시하기</button>
+        </form>
+    </div>
 </div>
 {% endblock content %}
 
