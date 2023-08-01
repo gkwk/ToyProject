@@ -35,6 +35,11 @@
             {% csrf_token %}
             <button type="submit" style="width:80px; height:30px; background-color:transparent; border:none;">삭제하기</button>
         </form>
+
+        <form method="get" action="{% url 'boards:update_post' post_pk %}" class="fw-bold">
+            {% csrf_token %}
+            <button type="submit" style="width:80px; height:30px; background-color:transparent; border:none;">수정하기</button>
+        </form>
         {% endif %}
         
     </div> 

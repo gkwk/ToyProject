@@ -87,3 +87,37 @@ def boards_delete_post(request,post_pk):
                 pass
             
     return redirect("/")
+
+def boards_update_post(request,post_pk):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            try:
+                post = Post.objects.get(id=post_pk) #쿼리셋을 얻는다.
+                if post.user_id_id == request.user.id: # *_id : db의 fk의 raw value에 접근한다.
+                    post_val = PostForm({
+                        "user_id" : request.user.id,
+                        "user_id_char" : request.user.username,
+                        "title" : request.POST.get("title"),
+                        "content" : request.POST.get("content"),
+                        "updated_bool" : False,
+                        "visible_bool" : True,
+                    })
+                                
+                    if post_val.is_valid():
+                        post.title = post_val.cleaned_data["title"]
+                        post.content = post_val.cleaned_data["content"]
+                        post.updated_bool = True
+                        
+                        post.save()
+                        return redirect("boards:post_detail", pk=post_pk) 
+            except:
+                pass
+        else:
+            try:
+                post = get_object_or_404(Post, pk=post_pk)
+            except:
+                return redirect("/")
+            
+            return render(request, 'boards/update_post.html', {'post': post})
+            
+    return redirect("/")

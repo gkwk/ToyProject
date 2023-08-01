@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block contenthead %}
-<link href="{% static "boards/css/posting.css" %}" rel="stylesheet">
+<link href="{% static "boards/css/update_post.css" %}" rel="stylesheet">
 {% endblock contenthead %}
 
 
@@ -20,12 +20,12 @@
         <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">제목</div>
-        <textarea name="title" class="mb-3" id="title" rows="2" cols="50" placeholder="제목을 입력해주세요"></textarea>
+        <textarea name="title" class="mb-3" id="title" rows="2" cols="50" placeholder="제목을 입력해주세요">{{ post.title }}</textarea>
         <div class="mb-3">내용</div>
-        <textarea name="content" class="mb-3" id="content" rows="20" cols="30" placeholder="내용을 입력해주세요"></textarea>
+        <textarea name="content" class="mb-3" id="content" rows="20" cols="30" placeholder="내용을 입력해주세요">{{ post.content }}</textarea>
         
         <br>
-        <button class="btn btn-lg btn-primary mb-3" type="submit">게시하기</button>
+        <button class="btn btn-lg btn-primary mb-3" type="submit">수정하기</button>
         </form>
     </div>
 </div>
