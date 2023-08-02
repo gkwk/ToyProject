@@ -51,79 +51,115 @@
         댓글이 없습니다.
         {% else %}
         {% for comment in comment_list %}
-        <div class="d-flex">
+        <div class="d-flex" id='{{ comment.id }}'>
             <div class="flex-shrink-0"><img class="rounded-circle" src="{% static 'img/dummypic.jpg' %}" alt="..."></div>
-            <div class="ms-3">
-                    
+                <div class="ms-3 w-100">
+                    <ul class="nav nav-pills fw-bold mb-1">
+                        {% if comment.updated_bool %}
+                        <li class="nav-item">{{ comment.user_id_char }} ( {{ comment.created_date }} / {{ comment.updated_date }} ) (갱신됨)</li>
+                        {% else %}
+                        <li class="nav-item">{{ comment.user_id_char }} ( {{ comment.created_date }} )</li>
+                        {% endif %} 
+
                     {% if comment.user_id == user.id %}
-                    <form method="post" action="{% url 'boards:delete_comment' comment.id %}" class="fw-bold">
-                        {% if comment.updated_bool %}
-                        {{ comment.user_id_char }} ( {{ comment.created_date }} / {{ comment.updated_date }} ) (갱신됨)
-                        {% else %}
-                        {{ comment.user_id_char }} ( {{ comment.created_date }} )
-                        {% endif %} 
+                        <li class="nav-item">
+                        <form method="post" action="{% url 'boards:delete_comment' comment.id %}" class="fw-bold">
+                            {% comment %} {% if comment.updated_bool %}
+                            {{ comment.user_id_char }} ( {{ comment.created_date }} / {{ comment.updated_date }} ) (갱신됨)
+                            {% else %}
+                            {{ comment.user_id_char }} ( {{ comment.created_date }} )
+                            {% endif %}  {% endcomment %}
 
-                        {% csrf_token %}
-                        <button type="submit" style="width:80px; height:30px; background-color:transparent; border:none;">삭제하기</button>
-                    </form>
+                            {% csrf_token %}
+                            <button type="submit" style="width:80px; height:30px; background-color:transparent; border:none; ">삭제하기</button>
+                        </form>
+                        </li>
+                        <li class="nav-item">
+                        <button style="width:80px; height:30px; background-color:transparent; border:none;" onclick="comment_update_input_Show({{ comment.id }})">수정하기</button>
+                        <li>
+                    </ul>
+                    <div>
+                        <div class="comment_area">
+                        {{ comment.comment_content }}
+                        </div>
+
+                        <div class="comment_update_input" style="display:none;">
+                        <form method="post" action="{% url 'boards:update_comment' comment.id %}">
+                            {% csrf_token %}
+                            <div class="register_form_field mb-1">
+                            <input  type="text"
+                                    class="form-control"
+                                    name="comment_content" 
+                                    value="{{ comment.comment_content }}"
+                                    placeholder="comment"
+                                    maxlength="300"
+                                    required
+                            >
+                            </div>
+                            <button type="submit" class="btn btn-primary">수정하기</button>
+                        </form>
+                        </div>
+                    </div>
+
                     {% else %}
-                    <div class="fw-bold">
+                    </ul>
+                    {% comment %} <div class="fw-bold">
                         {% if comment.updated_bool %}
                         {{ comment.user_id_char }} ( {{ comment.created_date }} / {{ comment.updated_date }} ) (갱신됨)
                         {% else %}
                         {{ comment.user_id_char }} ( {{ comment.created_date }} )
                         {% endif %} 
 
+                    </div> {% endcomment %}
+
+                    <div>
+                        {{ comment.comment_content }}
                     </div>
 
                     {% endif %}
                 
-                {{ comment.comment_content }}
-            
+                    
+                    
+                </div>
             </div>
-        </div>
 
+        {% comment %} 마지막 comment 다음에는 <br>을 추가하지 않는다. {% endcomment %}
+        {% if not forloop.last %}
+        <br>
+        {% endif %}
+                
         {% endfor %}
         {% endif %}
 
     </div>
 
-    <br>
-    
     {% if user.is_authenticated %}
+    <br>
     <div class="boards_post_contents" style="border: 1px solid rgb(152, 162, 247); border-radius: 15px; padding: 10px;">
 
     <div class="d-flex">
         <div class="flex-shrink-0"><img class="rounded-circle" src="{% static 'img/dummypic.jpg' %}" alt="..."></div>
-        <div class="ms-3">
-            <div class="fw-bold">
-                {{ user.username }}
-            </div>
-
-
-            
-        </div>
-    </div>
-
-        <br>
-        <div class="register_form">
-            <form method="post">
-                {% csrf_token %}
-                <div class="register_form_field">
-                <input  type="text"
-                        class="form-control"
-                        name="comment_content" 
-                        value="{{ comment_form.comment_content.value|default_if_none:'' }}"
-                        placeholder="comment"
-                        maxlength="300"
-                        required
-                >
+            <div class="ms-3 w-100">
+                <div class="fw-bold mb-1">
+                    {{ user.username }}
                 </div>
-        
-                <br>
-        
-                <button type="submit" class="btn btn-primary">생성하기</button>
-            </form>
+                <div class="register_form">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="register_form_field mb-1">
+                            <input  type="text"
+                                    class="form-control"
+                                    name="comment_content" 
+                                    value="{{ comment_form.comment_content.value|default_if_none:'' }}"
+                                    placeholder="comment"
+                                    maxlength="300"
+                                    required
+                            >
+                        </div>
+                        <button type="submit" class="btn btn-primary">게시하기</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div> 
     {% endif %}
@@ -133,5 +169,11 @@
 {% block contentjs %}
 <script>
     $("#page_boards_index").addClass("active");
+
+    function comment_update_input_Show(target_comment_id){
+        $("#"+target_comment_id+" .comment_area").toggle();
+        $("#"+target_comment_id+" .comment_update_input").toggle();
+        // console.log(target_comment_id)
+    }
 </script>
 {% endblock contentjs %}

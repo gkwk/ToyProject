@@ -1,7 +1,7 @@
 /* -------------------- post Page -------------------- */
 ._content .boards_post {
     min-height: 480px;
-    height: calc( 100vh - 73px - 24px - 24px - 24px - 63px );
+    height: calc( 100% - 73px - 24px - 24px - 24px - 63px );
     margin: 0 auto;
     
 }

@@ -121,3 +121,31 @@ def boards_update_post(request,post_pk):
             return render(request, 'boards/update_post.html', {'post': post})
             
     return redirect("/")
+
+def boards_update_comment(request,comment_pk):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            try:
+                post_comment = Comment.objects.get(id=comment_pk) #쿼리셋을 얻는다.
+                if post_comment.user_id_id == request.user.id: # *_id : db의 fk의 raw value에 접근한다.
+                    post_comment_val = CommentForm({"post_id" : post_comment.post_id,
+                                                    "user_id" : request.user.id,
+                                                    "user_id_char" : request.user.username,
+                                                    "comment_content" : request.POST.get("comment_content"),
+                                                    "updated_bool" : False,
+                                                    "visible_bool" : True,
+                                                    })
+                    
+                    if post_comment_val.is_valid():
+                        reverse_post_pk = post_comment.post_id_id
+                        
+                        post_comment.comment_content = post_comment_val.cleaned_data["comment_content"]
+                        post_comment.updated_bool = True
+                        
+                        post_comment.save()
+                        
+                        return redirect("boards:post_detail", pk=reverse_post_pk) 
+            except:
+                pass
+            
+    return redirect("/")
