@@ -8,6 +8,11 @@ main ._content{
   height: calc( 100% - 73px - 24px - 24px - 24px - 63px );
 }
 
+main ._content_inner{
+  min-height: calc( 100vh - 73px - 24px - 24px - 24px - 63px );
+  height: calc( 100% - 73px - 24px - 24px - 24px - 63px );
+}
+
 
 ._header .form-control-dark {
     border-color: var(--bs-gray);
