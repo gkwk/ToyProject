@@ -26,6 +26,7 @@
             <li class="nav-item"><a href="{% url 'boards:index' %}" class="nav-link" id="page_boards_index">Boards</a></li>
 
             {% if user.is_authenticated %}
+            <li class="nav-item"><a href="{% url 'ORM:index' %}" class="nav-link" id="page_orm">ORM</a></li>
             <li class="nav-item"><a href="{% url 'services:train' %}" class="nav-link" id="page_ai_train">AI train</a></li>
             <li class="nav-item"><a href="{% url 'services:predict' %}" class="nav-link" id="page_ai_predict">AI predict</a></li>
             <li class="nav-item"><a href="{% url 'account:logout' %}" class="nav-link">Log Out</a></li>

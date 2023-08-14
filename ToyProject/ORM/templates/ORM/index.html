@@ -1,1 +1,106 @@
-1
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block contenthead %}
+<link href="{% static "ORM/css/index.css" %}" rel="stylesheet">
+{% endblock contenthead %}
+
+
+{% block contentpremain %}
+{% endblock contentpremain %}
+
+{% block content %}
+<div class="boards_post">
+    <div class="boards_post_contents">
+        <div id="boards_head">▶ 결과</div>
+        <div class="boards_post_count">행의 갯수 {{ Post_len }}개</div>
+        <table class="table table-primary" id="tableid">
+            <thead>
+                <tr class="table-primary" id="table-head">
+                    {% for column_name in column_name_list %}
+                    <th>{{ column_name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in row_list %}
+                <tr class="table-light" id="table-main">
+                    {% for row_content in row %}
+                    <th>{{ row_content }}</th>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if user.is_authenticated %}
+        <div class="d-flex justify-content-center">
+            <form method="post" class="d-flex justify-content-center">
+                {% csrf_token %}
+
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" style="width: 300px;" id="dropdownselect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        Right-aligned menu
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" id="dropdowntest">
+                        <button class="dropdown-item" type="button" value="1">Action</button>
+                        <button class="dropdown-item" type="button" value="2">Another action</button>
+                        <button class="dropdown-item" type="button" value="3">Something else here</button>
+                    </div>
+                </div>
+                
+                <div class="m-1"></div>
+
+                <div class="register_form_field">
+                    <input  type="hidden"
+                            class="form-control"
+                            name="comment_content" 
+                            value="{{ comment_form.comment_content.value|default_if_none:'' }}"
+                            placeholder="comment"
+                            maxlength="300"
+                            required
+                            id="target_key"
+                    >
+                </div>
+                <div class="m-1"></div>
+                <button type="submit" class="btn btn-primary h-38">불러오기</button>
+            </form>
+
+        {% comment %} <button type="button" class="btn btn-primary " onclick="location.href='{% url 'ORM:index' %}'">데이터 불러오기</button> {% endcomment %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block contentjs %}
+<script>
+    $("#page_orm").addClass("active");
+
+    ////$('#login_form').on('click', (event) => {
+    //$('#dropdowntest > .dropdown-item').on('click', function () {
+    //    //console.log("1")
+    //    //var html = $(this).html();
+    //    
+    //    var df = $(this).attr('value');//$(this).val()
+    //    console.log(df)
+    //    $(this).addClass("active");
+    //    //$('[name=csrfmiddlewaretoken]').val(data.csrf_token);
+    //    //$('#example button.dropdown-toggle').html(html + ' <span class="caret"></span>');
+    //});
+
+    $('#dropdowntest > .dropdown-item').on('click', function () {
+	    $('#dropdownselect').text($(this).text());
+        $('#target_key').text($(this).text());
+		var log = $(this).val();
+        $('#dropdowntest > .dropdown-item').removeClass("active"); // 기존의 active class 모두 제거
+        $(this).addClass("active"); // 선택된 값에 active class 추가
+		//console.log(log);
+    });
+</script>
+{% endblock contentjs %}
