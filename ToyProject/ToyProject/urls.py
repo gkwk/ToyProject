@@ -23,9 +23,10 @@ urlpatterns = [
     path("admin/", admin.site.urls,name="admin"),
     path("",ToyProject.views.index,name="index"),
     path("header/",ToyProject.views.header,name="header"),
-       
+    
     #include
     path("account/",include(("account.urls","account"),namespace="account")),
     path("services/",include(("services.urls","services"),namespace="services")),
     path("boards/",include(("boards.urls","boards"),namespace="boards")),
+    path("ORM/",include(("ORM.urls","ORM"),namespace="ORM")),
 ]
