@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from .secret_manager import get_secret
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
+    'celery',
+    'django_celery_beat',
+    'django_celery_results',
+    
     "rest_framework",
     "account",
     "services",
@@ -130,7 +135,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True #Celery beats에서 sqlite의 TZ문제 해결을 위해 True로 설정
 
 
 # Static files (CSS, JavaScript, Images)
@@ -199,3 +204,9 @@ REST_FRAMEWORK = {
     ],
     # 'PAGE_SIZE': 10
 }
+
+
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "amqp://guest:guest@localhost:5672/")
+CELERY_TIMEZONE = 'Asia/Seoul'
+CELERY_RESULT_BACKEND = 'django-db'
