@@ -35,5 +35,6 @@ $ npm run lint
 ```
 
 # AI_test.csv
-$$ y = 4x_0 + 5x_1 + 2x_2 + 7_x3 + 0.1x_4 + 15x_5 + 0.05x_6+ x_7 $$
-`ref : https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions`
+```math
+y = 4x_0 + 5x_1 + 2x_2 + 7_x3 + 0.1x_4 + 15x_5 + 0.05x_6+ x_7
+```

@@ -5,3 +5,5 @@
 
 - django 비밀번호 찾기 시 숨겨진 username을 변경해도 링크만 만료되고 다른 user의 비밀번호는 변경되지 않는 것을 확인
 - class view에서는 reverse_lazy를 사용해야 한다.
+- md math 표기법
+    - `https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions`
